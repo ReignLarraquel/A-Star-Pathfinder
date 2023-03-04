@@ -1,31 +1,38 @@
-# Open maze.txt Files
 maze = open("maze.txt", "r")
-
-length = maze.readline() # Get the length of the maze
-
-for i in range(int(length)): # Rows of the maze
-   for j in range(int(length)): # Columns of the maze
-
-      # Read one character at a time
-      symbol = maze.read(1) 
-
-      # Check if the character is a dot, wall, start, or goal
-      # The print statements is just to remove the error
-      if(symbol == '.'):
-         print(".")
-         # Code for empty space
-
-      elif(symbol == '#'):
-         print("#")
-         # Code for wall
-
-      elif(symbol == 'S'):
-         print("S")
-         # Code for start
-
-      elif(symbol == 'G'):
-         print("G")
-         # Code for goal
-
-# Close the file
+length = int(maze.readline())
+field = maze.read().split("\n")
 maze.close()
+for i in range(length):
+   print(field[i])
+for j in range(length):
+   for k in range(length):
+      if(field[j][k] == 'S'):
+         startnodey = j
+         startnodex = k
+      if(field[j][k] == 'G'):
+         endnodey = j
+         endnodex = k
+
+def isBorder(x, y):
+   if(x >= 0 and x < length and y >= 0 and y < length):
+      return True
+   return False
+
+def gsearcher():
+   bot = []
+   currentx = startnodex
+   currenty = startnodey
+   while(bot[currentx][currenty] != field[endnodex][endnodey]):
+      if(isBorder(currentx+1, currenty)):
+         currentx += 1
+         bot[currentx][currenty]
+         print('right')
+      if(isBorder(currentx, currenty+1)):
+         currenty += 1
+         print('down')
+      if(isBorder(currentx-1, currenty)):
+         currentx -= 1
+         print('left')
+      if(isBorder(currentx, currenty)):
+         currenty -= 1
+         print('up')
