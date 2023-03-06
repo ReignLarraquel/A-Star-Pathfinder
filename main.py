@@ -1,38 +1,37 @@
+def isEmpty(field, x, y):
+   if(x >= 0 and x < length and y >= 0 and y < length and field[x][y] != '#'):
+      return True
+   return False
+
+def addEmptySpace(currentx, currenty):
+   if(isEmpty(field, currentx+1, currenty)): #right
+      pass
+   if(isEmpty(field, currentx, currenty+1)): #down
+      pass
+   if(isEmpty(field, currentx-1, currenty)): #left
+      pass
+   if(isEmpty(field, currentx, currenty-1)): #up
+      pass
+
 maze = open("maze.txt", "r")
 length = int(maze.readline())
 field = maze.read().split("\n")
 maze.close()
+adjlist = {
+
+}
 for i in range(length):
    print(field[i])
+
 for j in range(length):
    for k in range(length):
       if(field[j][k] == 'S'):
          startnodey = j
          startnodex = k
-      if(field[j][k] == 'G'):
+      elif(field[j][k] == 'G'):
          endnodey = j
          endnodex = k
-
-def isBorder(x, y):
-   if(x >= 0 and x < length and y >= 0 and y < length):
-      return True
-   return False
-
-def gsearcher():
-   bot = []
-   currentx = startnodex
-   currenty = startnodey
-   while(bot[currentx][currenty] != field[endnodex][endnodey]):
-      if(isBorder(currentx+1, currenty)):
-         currentx += 1
-         bot[currentx][currenty]
-         print('right')
-      if(isBorder(currentx, currenty+1)):
-         currenty += 1
-         print('down')
-      if(isBorder(currentx-1, currenty)):
-         currentx -= 1
-         print('left')
-      if(isBorder(currentx, currenty)):
-         currenty -= 1
-         print('up')
+         
+      if(isEmpty(field, j, k)):
+         
+         addEmptySpace(j, k)
